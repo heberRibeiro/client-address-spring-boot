@@ -1,14 +1,16 @@
 package br.com.projects.main.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_cliente")
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,12 +20,12 @@ public class Cliente implements Serializable {
 	private Integer id;
 	private String nome;
 	private String cpf;
-	private Instant dataNascimento;
+	private LocalDate dataNascimento;
 
 	public Cliente() {
 	}
 
-	public Cliente(Integer id, String nome, String cpf, Instant dataNascimento) {
+	public Cliente(Integer id, String nome, String cpf, LocalDate dataNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -54,11 +56,11 @@ public class Cliente implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Instant getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Instant dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

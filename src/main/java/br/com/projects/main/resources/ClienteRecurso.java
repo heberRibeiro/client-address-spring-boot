@@ -1,6 +1,6 @@
 package br.com.projects.main.resources;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +15,8 @@ public class ClienteRecurso {
 
 	@GetMapping
 	public ResponseEntity<Cliente> findAll() {
-		Cliente c = new Cliente(1, "João", "098.765.432-21", Instant.parse("2019-06-20T19:53:07Z"));
+		Cliente c = new Cliente(1, "João", "098.765.432-21", LocalDate.parse("2000-06-20"));
 		return ResponseEntity.ok().body(c);
 
 	}
-
 }
