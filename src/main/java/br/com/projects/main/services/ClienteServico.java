@@ -19,7 +19,7 @@ public class ClienteServico {
 		return clienteRepositorio.findAll();
 	}
 
-	public Cliente findById(Integer id) {
+	public Cliente findById(Long id) {
 		Optional<Cliente> cliente = clienteRepositorio.findById(id);
 		return cliente.get();
 	}
