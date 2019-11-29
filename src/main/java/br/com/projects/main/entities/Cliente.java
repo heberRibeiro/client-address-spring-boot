@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_cliente")
 public class Cliente implements Serializable {
@@ -26,6 +28,7 @@ public class Cliente implements Serializable {
 	@OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Endereco endereco;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataNascimento;
 
 	public Cliente() {
