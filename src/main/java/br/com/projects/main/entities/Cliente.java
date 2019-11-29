@@ -3,10 +3,12 @@ package br.com.projects.main.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,16 +22,21 @@ public class Cliente implements Serializable {
 	private Long id;
 	private String nome;
 	private String cpf;
+	
+	@OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private Endereco endereco;
+	
 	private LocalDate dataNascimento;
 
 	public Cliente() {
 	}
 
-	public Cliente(Long id, String nome, String cpf, LocalDate dataNascimento) {
+	public Cliente(Long id, String nome, String cpf, LocalDate dataNascimento, Endereco endereco) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
+		this.endereco = endereco;
 	}
 
 	public Long getId() {
@@ -64,6 +71,14 @@ public class Cliente implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,5 +103,4 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-
 }
