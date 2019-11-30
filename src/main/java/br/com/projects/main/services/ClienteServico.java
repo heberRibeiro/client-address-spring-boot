@@ -27,5 +27,8 @@ public class ClienteServico {
 	public Cliente insert(Cliente cliente) {
 		return clienteRepositorio.save(cliente);
 	}
-
+	
+	public void delete(Long id) {
+		clienteRepositorio.deleteById(id);
+	}
 }
