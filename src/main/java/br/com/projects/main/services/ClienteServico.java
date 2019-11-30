@@ -23,5 +23,9 @@ public class ClienteServico {
 		Optional<Cliente> cliente = clienteRepositorio.findById(id);
 		return cliente.get();
 	}
+	
+	public Cliente insert(Cliente cliente) {
+		return clienteRepositorio.save(cliente);
+	}
 
 }
