@@ -31,4 +31,18 @@ public class ClienteServico {
 	public void delete(Long id) {
 		clienteRepositorio.deleteById(id);
 	}
+	
+	public Cliente update(Long id, Cliente cliente) {
+		Cliente obj = clienteRepositorio.getOne(id);
+		update(obj, cliente);
+		return clienteRepositorio.save(obj);
+	}
+
+	private void update(Cliente obj, Cliente cliente) {
+		obj.setNome(cliente.getNome());
+		obj.setCpf(cliente.getCpf());
+		obj.setDataNascimento(cliente.getDataNascimento());
+		obj.setEndereco(cliente.getEndereco());
+		
+	}
 }
