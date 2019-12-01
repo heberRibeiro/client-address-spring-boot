@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,7 +26,8 @@ public class Cliente implements Serializable {
 	private String nome;
 	private String cpf;
 	
-	@OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "end_id")
 	private Endereco endereco;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -34,12 +36,12 @@ public class Cliente implements Serializable {
 	public Cliente() {
 	}
 
-	public Cliente(Long id, String nome, String cpf, LocalDate dataNascimento, Endereco endereco) {
+	public Cliente(Long id, String nome, String cpf, Endereco endereco, LocalDate dataNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
+		this.dataNascimento = dataNascimento;
 	}
 
 	public Long getId() {
