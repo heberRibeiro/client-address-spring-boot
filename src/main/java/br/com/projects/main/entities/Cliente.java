@@ -2,14 +2,15 @@ package br.com.projects.main.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -25,22 +26,20 @@ public class Cliente implements Serializable {
 	private Long id;
 	private String nome;
 	private String cpf;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "end_id")
-	private Endereco endereco;
-	
+
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private Set<Endereco> endereco = new HashSet<>();
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataNascimento;
 
 	public Cliente() {
 	}
 
-	public Cliente(Long id, String nome, String cpf, Endereco endereco, LocalDate dataNascimento) {
+	public Cliente(Long id, String nome, String cpf, LocalDate dataNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.endereco = endereco;
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -76,11 +75,11 @@ public class Cliente implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Endereco getEndereco() {
+	public Set<Endereco> getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(Set<Endereco> endereco) {
 		this.endereco = endereco;
 	}
 

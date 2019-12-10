@@ -25,19 +25,20 @@ public class ClienteServico {
 		Optional<Cliente> cliente = clienteRepositorio.findById(id);
 		return cliente.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
-	
+
 	public Cliente insert(Cliente cliente) {
+		cliente.getEndereco().stream().forEach((p) -> p.setCliente(cliente)); // Mantém a consistência dos dados
 		return clienteRepositorio.save(cliente);
 	}
-	
+
 	public void delete(Long id) {
 		try {
-		clienteRepositorio.deleteById(id);
+			clienteRepositorio.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
 		}
 	}
-	
+
 	public Cliente update(Long id, Cliente cliente) {
 		Cliente obj = clienteRepositorio.getOne(id);
 		update(obj, cliente);
@@ -49,6 +50,5 @@ public class ClienteServico {
 		obj.setCpf(cliente.getCpf());
 		obj.setDataNascimento(cliente.getDataNascimento());
 		obj.setEndereco(cliente.getEndereco());
-		
 	}
 }
