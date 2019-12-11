@@ -2,6 +2,7 @@ package br.com.projects.main.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.projects.main.dao.EnderecoDto;
 import br.com.projects.main.entities.Endereco;
 import br.com.projects.main.services.EnderecoServico;
 
@@ -26,9 +28,10 @@ public class EnderecoRecurso {
 	private EnderecoServico enderecoServico;
 
 	@GetMapping
-	public ResponseEntity<List<Endereco>> findAll() {
+	public ResponseEntity<List<EnderecoDto>> findAll() {
 		List<Endereco> lista = enderecoServico.findAll();
-		return ResponseEntity.ok().body(lista);
+		List<EnderecoDto> listaDto = lista.stream().map(obj -> new EnderecoDto(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listaDto);
 	}
 
 	@GetMapping("/{id}")
