@@ -1,4 +1,4 @@
-package br.com.projects.main.dao;
+package br.com.projects.main.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;

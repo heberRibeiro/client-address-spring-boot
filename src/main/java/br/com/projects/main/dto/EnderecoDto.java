@@ -1,4 +1,4 @@
-package br.com.projects.main.dao;
+package br.com.projects.main.dto;
 
 import br.com.projects.main.entities.Endereco;
 

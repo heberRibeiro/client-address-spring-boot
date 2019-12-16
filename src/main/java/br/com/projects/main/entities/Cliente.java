@@ -15,6 +15,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.projects.main.services.validation.ClienteInsert;
+
+@ClienteInsert
 @Entity
 @Table(name = "tb_cliente")
 public class Cliente implements Serializable {

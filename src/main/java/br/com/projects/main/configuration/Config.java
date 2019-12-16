@@ -26,8 +26,8 @@ public class Config implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Cliente cliente1 = new Cliente(null, "Maria", "098.123.465-27", LocalDate.parse("1990-11-28"));
-		Cliente cliente2 = new Cliente(null, "João", "098.765.432-21", LocalDate.parse("2000-06-20"));
+		Cliente cliente1 = new Cliente(null, "Maria", "24797352060", LocalDate.parse("1990-11-28"));
+		Cliente cliente2 = new Cliente(null, "João", "31690417030", LocalDate.parse("2000-06-20"));
 
 		clienteRepositorio.saveAll(Arrays.asList(cliente1, cliente2));
 
