@@ -6,4 +6,6 @@ import br.com.projects.main.entities.Cliente;
 
 public interface ClienteRepositorio extends JpaRepository<Cliente, Long> {
 
+	Cliente findByCpf(String cpf);
+	
 }
