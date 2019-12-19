@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.projects.main.dto.EnderecoDto;
+
 @Entity
 @Table(name = "tb_endereco")
 public class Endereco implements Serializable {
@@ -49,6 +51,17 @@ public class Endereco implements Serializable {
 		this.uf = uf;
 		this.cep = cep;
 		this.cliente = cliente;
+	}
+
+	public Endereco(EnderecoDto enderecoDto) {
+		this.id = null;
+		this.logradouro = enderecoDto.getLogradouro();
+		this.numero = enderecoDto.getNumero();
+		this.complemento = enderecoDto.getComplemento();
+		this.bairro = enderecoDto.getBairro();
+		this.cidade = enderecoDto.getCidade();
+		this.uf = enderecoDto.getUf();
+		this.cep = enderecoDto.getCep();
 	}
 
 	public Long getId() {

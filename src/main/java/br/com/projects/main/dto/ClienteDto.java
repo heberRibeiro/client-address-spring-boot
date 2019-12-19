@@ -6,24 +6,35 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import br.com.projects.main.entities.Cliente;
 
 public class ClienteDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@JsonProperty("nome")
 	private String nome;
+	
+	@JsonProperty("cpf")
 	private String cpf;
-	private Set<EnderecoDto> enderecoDto = new HashSet<>();
+
+	@JsonProperty("endereco")
+	private Set<EnderecoDto> endereco = new HashSet<>();
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonProperty("dataNascimento")
 	private LocalDate dataNascimento;
 
 	public ClienteDto() {
 	}
 
 	public ClienteDto(Cliente cliente) {
-		nome = cliente.getNome();
-		cpf = cliente.getCpf();
-		enderecoDto = cliente.getEndereco().stream().map(obj -> new EnderecoDto(obj)).collect(Collectors.toSet());
-		dataNascimento = cliente.getDataNascimento();
+		setNome(cliente.getNome());
+		setCpf(cliente.getCpf());
+		setEndereco(cliente.getEndereco().stream().map(end -> new EnderecoDto(end)).collect(Collectors.toSet()));
+		setDataNascimento(cliente.getDataNascimento());
 	}
 
 	public String getNome() {
@@ -43,11 +54,11 @@ public class ClienteDto implements Serializable {
 	}
 
 	public Set<EnderecoDto> getEndereco() {
-		return enderecoDto;
+		return endereco;
 	}
 
-	public void setEndereco(Set<EnderecoDto> enderecoDto) {
-		this.enderecoDto = enderecoDto;
+	public void setEndereco(Set<EnderecoDto> endereco) {
+		this.endereco = endereco;
 	}
 
 	public LocalDate getDataNascimento() {

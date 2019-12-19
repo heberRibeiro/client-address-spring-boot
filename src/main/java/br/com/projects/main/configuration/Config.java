@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Profile;
 import br.com.projects.main.entities.Cliente;
 import br.com.projects.main.entities.Endereco;
 import br.com.projects.main.repositories.ClienteRepositorio;
-import br.com.projects.main.repositories.EnderecoRepositorio;
 
 @Configuration
 @Profile("test")
@@ -20,8 +19,8 @@ public class Config implements CommandLineRunner {
 	@Autowired
 	private ClienteRepositorio clienteRepositorio;
 	
-	@Autowired
-	private EnderecoRepositorio enderecoRepositorio;
+//	@Autowired
+//	private EnderecoRepositorio enderecoRepositorio;
 
 	@Override
 	public void run(String... args) throws Exception {

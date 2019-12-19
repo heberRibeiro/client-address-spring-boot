@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.projects.main.dto.ClienteDto;
 import br.com.projects.main.services.validation.ClienteInsert;
 
 @ClienteInsert
@@ -35,7 +37,7 @@ public class Cliente implements Serializable {
 
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Endereco> endereco = new HashSet<>();
-
+	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataNascimento;
 
@@ -47,6 +49,17 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
+	}
+	
+	public Cliente(ClienteDto clienteDto) {
+		setId(null);
+		setNome(clienteDto.getNome());
+		setCpf(clienteDto.getCpf());
+		setDataNascimento(clienteDto.getDataNascimento());
+		setEndereco(clienteDto.getEndereco().stream().map(endDto -> new Endereco(endDto)).collect(Collectors.toSet()));
+		for (Endereco end : endereco) {
+			end.setCliente(this);
+		}
 	}
 
 	public Long getId() {

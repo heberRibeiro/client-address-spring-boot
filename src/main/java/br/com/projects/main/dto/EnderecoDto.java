@@ -1,28 +1,46 @@
 package br.com.projects.main.dto;
 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import br.com.projects.main.entities.Endereco;
 
-public class EnderecoDto {
+public class EnderecoDto implements Serializable {
+	private static final long serialVersionUID = 1L;
 
+	@JsonProperty("logradouro")
 	private String logradouro;
+
+	@JsonProperty("numero")
 	private Integer numero;
+
+	@JsonProperty("complemento")
 	private String complemento;
+
+	@JsonProperty("bairro")
 	private String bairro;
+
+	@JsonProperty("cidade")
 	private String cidade;
+
+	@JsonProperty("uf")
 	private String uf;
+
+	@JsonProperty("cep")
 	private String cep;
 
 	public EnderecoDto() {
 	}
 
 	public EnderecoDto(Endereco endereco) {
-		logradouro = endereco.getLogradouro();
-		numero = endereco.getNumero();
-		complemento = endereco.getComplemento();
-		bairro = endereco.getBairro();
-		cidade = endereco.getCidade();
-		uf = endereco.getUf();
-		cep = endereco.getCep();
+		setLogradouro(endereco.getLogradouro());
+		setNumero(endereco.getNumero());
+		setComplemento(endereco.getComplemento());
+		setBairro(endereco.getBairro());
+		setCidade(endereco.getCidade());
+		setUf(endereco.getUf());
+		setCep(endereco.getCep());
 	}
 
 	public String getLogradouro() {
