@@ -32,7 +32,7 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(ConstraintViolationException.class)
 	public ResponseEntity<StandardError> constraintViolation(ConstraintViolationException ex, HttpServletRequest req) {
 		String error = "Violação de restrição de campo";
-		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+		HttpStatus status = HttpStatus.BAD_REQUEST;
 		String message = ex.getMessage();
 		String path = req.getRequestURI();
 		StandardError err = new StandardError(Instant.now(), status.value(), error, message, path);

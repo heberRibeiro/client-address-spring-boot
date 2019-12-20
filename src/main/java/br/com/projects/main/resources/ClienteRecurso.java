@@ -5,6 +5,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,12 +44,12 @@ public class ClienteRecurso {
 	}
 
 	@PostMapping
-	public ResponseEntity<Cliente> insert(@RequestBody ClienteDto clienteDto) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDto clienteDto) {
 		Cliente cliente = new Cliente(clienteDto);
 		cliente = clienteServico.insert(cliente);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
 				.toUri();
-		return ResponseEntity.created(uri).body(cliente);
+		return ResponseEntity.created(uri).build();
 		
 	}
 

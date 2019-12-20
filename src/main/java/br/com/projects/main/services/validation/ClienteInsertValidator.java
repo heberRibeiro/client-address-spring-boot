@@ -5,33 +5,33 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.projects.main.entities.Cliente;
+import br.com.projects.main.dto.ClienteDto;
+import br.com.projects.main.services.ClienteServico;
 import br.com.projects.main.services.validation.utils.BR;
 
-public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, Cliente> {
+public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteDto> {
 
 	@Autowired
-	//private ClienteRepositorio clienteRepositorio;
+	private ClienteServico clienteServico;
 
 	@Override
 	public void initialize(ClienteInsert constraintAnnotation) {
 	}
 
 	@Override
-	public boolean isValid(Cliente cliente, ConstraintValidatorContext context) {
-
-		// Retorna nulo, caso o cliente a ser inserido não esteja no banco. (cpf não conste no banco)
-		//Cliente cli = clienteRepositorio.findByCpf(cliente.getCpf());  
+	public boolean isValid(ClienteDto clienteDto, ConstraintValidatorContext context) {
 
 		/*
-		 * Validação do cpf em termos da legitimidade dos números "BR.isValidCpf(cliente.getCpf())"
-		 * e em relação a não duplicidade "cli == null"
+		 * Validação do cpf em termos da legitimidade dos números:
+		 * BR.isValidCpf(cliente.getCpf()) Validação em relação a não duplicidade de
+		 * cpf's no banco: clienteServico.findByCpf(cliente.getCpf()) == null
 		 */
-		if (BR.isValidCpf(cliente.getCpf())) {
+		if (BR.isValidCpf(clienteDto.getCpf()) && clienteServico.findByCpf(clienteDto.getCpf()) == null) {
 			return true;
 		} else {
 			return false;
 		}
+
 	}
 
 }

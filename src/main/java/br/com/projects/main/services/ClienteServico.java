@@ -51,4 +51,8 @@ public class ClienteServico {
 		obj.setDataNascimento(cliente.getDataNascimento());
 		obj.setEndereco(cliente.getEndereco());
 	}
+
+	public Cliente findByCpf(String cpf) {
+		return clienteRepositorio.findByCpf(cpf);
+	}
 }
