@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.projects.main.dto.ClienteDto;
 import br.com.projects.main.entities.Cliente;
 import br.com.projects.main.repositories.ClienteRepositorio;
 import br.com.projects.main.services.exceptions.ResourceNotFoundException;
@@ -54,5 +55,10 @@ public class ClienteServico {
 
 	public Cliente findByCpf(String cpf) {
 		return clienteRepositorio.findByCpf(cpf);
+	}
+
+	public Cliente fromDto(ClienteDto clienteDto) {
+		Cliente cliente = new Cliente(clienteDto);
+		return cliente;
 	}
 }

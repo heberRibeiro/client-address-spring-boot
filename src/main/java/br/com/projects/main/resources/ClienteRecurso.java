@@ -44,12 +44,12 @@ public class ClienteRecurso {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDto clienteDto) {
-		Cliente cliente = new Cliente(clienteDto);
+	public ResponseEntity<Cliente> insert(@Valid @RequestBody ClienteDto clienteDto) {
+		Cliente cliente = clienteServico.fromDto(clienteDto);
 		cliente = clienteServico.insert(cliente);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
 				.toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(cliente);
 		
 	}
 
